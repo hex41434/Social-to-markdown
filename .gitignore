@@ -1,0 +1,30 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+*.py[cod]
+
+# Local configuration and private social exports
+config.toml
+data/*
+!data/inbox/
+!data/inbox/.gitkeep
+!data/processed/
+!data/processed/.gitkeep
+data/credentials.json
+data/credentials/
+logs/*
+!logs/.gitkeep
+
+# Local secrets and generated caches
+.env.*
+!.env.example
+*.pem
+*.key
+*.session
+*.session-journal
+.ruff_cache/
+launcher/**/project-dir.txt

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AiFa Social</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <img src="/logo.svg" alt="" class="brand-mark" />
+          <div>
+            <span class="eyebrow">LOCAL CONTROL CENTER</span>
+            <h1>AiFa Social</h1>
+          </div>
+        </div>
+        <div class="privacy-pill"><span></span> Local only · auto-stops in 30 min</div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="kicker">Choose. Set a limit. Watch it land in Obsidian.</p>
+          <h2>Your saves, under your control.</h2>
+          <p class="subcopy">
+            Nothing runs on a schedule. A connector starts only after you press
+            the button below.
+          </p>
+        </div>
+        <div class="obsidian-destination">
+          <span>DESTINATION</span>
+          <strong>Obsidian / Social Saves</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <div class="config-card">
+          <div class="section-heading">
+            <span class="step">01</span>
+            <div>
+              <h3>Pick a source</h3>
+              <p>Only one connector runs at a time.</p>
+            </div>
+          </div>
+
+          <div class="platform-grid" role="radiogroup" aria-label="Social platform">
+            <button class="platform active" data-platform="x" role="radio" aria-checked="true">
+              <span class="platform-icon x-icon">𝕏</span>
+              <span><strong>X</strong><small>Bookmarks · saved credential</small></span>
+              <i></i>
+            </button>
+            <button class="platform" data-platform="linkedin" role="radio" aria-checked="false">
+              <span class="platform-icon linkedin-icon">in</span>
+              <span><strong>LinkedIn</strong><small>Saved Posts · current Chrome login</small></span>
+              <i></i>
+            </button>
+            <button class="platform" data-platform="telegram" role="radio" aria-checked="false">
+              <span class="platform-icon telegram-icon">➤</span>
+              <span><strong>Telegram</strong><small>Saved Messages · local session</small></span>
+              <i></i>
+            </button>
+            <button class="platform disabled" disabled>
+              <span class="platform-icon instagram-icon">◎</span>
+              <span><strong>Instagram</strong><small>Official export only</small></span>
+              <em>SOON</em>
+            </button>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section-heading compact">
+            <span class="step">02</span>
+            <div>
+              <h3>How many?</h3>
+              <p id="count-help">X allows 1–30 items per manual run.</p>
+            </div>
+          </div>
+
+          <div class="count-control">
+            <button id="minus" aria-label="Decrease count">−</button>
+            <input id="count" type="number" min="1" max="30" value="10" inputmode="numeric" />
+            <button id="plus" aria-label="Increase count">+</button>
+            <span>items</span>
+          </div>
+
+          <label class="risk" id="risk-row">
+            <input id="risk" type="checkbox" />
+            <span class="checkmark">✓</span>
+            <span>I understand this connector uses unofficial read-only access.</span>
+          </label>
+
+          <button class="run-button" id="run">
+            <span>Start manual sync</span>
+            <b>→</b>
+          </button>
+          <p class="browser-note" id="browser-note"></p>
+        </div>
+
+        <aside class="activity-card" id="activity-card">
+          <div class="activity-header">
+            <div>
+              <span class="eyebrow">LIVE ACTIVITY</span>
+              <h3 id="job-title">Ready when you are</h3>
+            </div>
+            <span class="status ready" id="status">READY</span>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-meta">
+              <span id="phase">No connector is running.</span>
+              <strong id="percent">0%</strong>
+            </div>
+            <div class="progress-track"><div id="progress"></div></div>
+          </div>
+
+          <div class="terminal" id="terminal">
+            <div><time>now</time><span>Select a source and start a manual sync.</span></div>
+          </div>
+
+          <div class="result-grid" id="results" hidden>
+            <div><strong id="created">0</strong><span>Created</span></div>
+            <div><strong id="updated">0</strong><span>Updated</span></div>
+            <div><strong id="skipped">0</strong><span>Skipped</span></div>
+            <div><strong id="pending">0</strong><span>Pending</span></div>
+          </div>
+
+          <div class="extension-hint" id="extension-hint" hidden>
+            <strong>LinkedIn tab opened</strong>
+            <p>
+              Keep this page open. The local Chrome extension captures the visible
+              Saved Posts and reports progress here.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        <span>Raw social content never enters this dashboard.</span>
+        <span>Summaries run through local Ollama.</span>
+      </footer>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

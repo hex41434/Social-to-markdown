@@ -1,0 +1,4 @@
+interface:
+  display_name: "Social Saves to Obsidian"
+  short_description: "Connect and sync social saves into Obsidian"
+  default_prompt: "Use $socials-obsidian to safely connect or sync my social saves into Obsidian through official APIs."

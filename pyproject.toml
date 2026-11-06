@@ -1,0 +1,35 @@
+[project]
+name = "socials-obsidian"
+version = "0.1.0"
+description = "Safely sync social saves into an Obsidian vault"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+  "beautifulsoup4>=4.12,<5",
+  "pyyaml>=6.0,<7",
+  "telethon>=1.40,<2",
+  "typer>=0.16,<1",
+]
+
+[project.scripts]
+socials = "socials_obsidian.cli:app"
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["socials_obsidian"]

@@ -1,0 +1,35 @@
+#!/bin/bash
+set -u
+
+launcher_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+location_file="$launcher_dir/../Resources/project-dir.txt"
+if [[ -f "$location_file" ]]; then
+  IFS= read -r project_dir < "$location_file"
+else
+  project_dir="$(cd "$launcher_dir/../../../.." && pwd)"
+fi
+export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+if [[ ! -f "$project_dir/pyproject.toml" ]] || ! command -v uv >/dev/null 2>&1; then
+  echo "Install uv and reinstall this launcher from the project checkout." >&2
+  exit 1
+fi
+mkdir -p "$project_dir/logs"
+dashboard_url="http://127.0.0.1:8766"
+log_path="$project_dir/logs/control-center.log"
+
+if ! /usr/bin/curl --silent --fail --max-time 1 "$dashboard_url/api/status" >/dev/null 2>&1; then
+  cd "$project_dir" || exit 1
+  /usr/bin/nohup /usr/bin/env \
+    UV_CACHE_DIR=/private/tmp/socials-control-center-uv-cache \
+    uv run socials dashboard --no-open \
+    >>"$log_path" 2>&1 &
+
+  for _ in {1..30}; do
+    if /usr/bin/curl --silent --fail --max-time 1 "$dashboard_url/api/status" >/dev/null 2>&1; then
+      break
+    fi
+    /bin/sleep 0.2
+  done
+fi
+
+/usr/bin/open -a "Google Chrome" "$dashboard_url"

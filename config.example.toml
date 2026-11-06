@@ -1,0 +1,10 @@
+vault_path = "~/Documents/Obsidian Vault"
+notes_folder = "Social Saves"
+data_dir = "data"
+
+[ollama]
+base_url = "http://127.0.0.1:11434"
+model = "qwen3:4b-instruct"
+min_summary_chars = 80
+excerpt_chars = 600
+
